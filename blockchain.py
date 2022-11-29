@@ -76,7 +76,9 @@ class Blockchain:
     def save_chain(self, filename):
         with open(filename, "w") as f:
             for block in self.chain:
-                f.write(f"{block.index},{block.timestamp},{block.data},{block.previous_hash},{block.hash}\n")
+                f.write(
+                    f"{block.index},{block.timestamp},{block.data},{block.previous_hash},{block.hash}\n"
+                )
 
     def load_chain(self, filename):
         with open(filename, "r") as f:

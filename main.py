@@ -59,4 +59,11 @@ def is_valid():
     return jsonify(response), 200
 
 
+@app.route("/save_chain", methods=["GET"])
+def save_chain():
+    blockchain.save_chain("blockchain.json")
+    response = {"message": "Blockchain saved"}
+    return jsonify(response), 200
+
+
 app.run(host="0.0.0.0", port=5000)
