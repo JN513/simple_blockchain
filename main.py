@@ -61,7 +61,7 @@ def is_valid():
 
 @app.route("/save_chain", methods=["GET"])
 def save_chain():
-    blockchain.save_chain("blockchain.json")
+    blockchain.save_chain("blockchain.txt")
     response = {"message": "Blockchain saved"}
     return jsonify(response), 200
 
