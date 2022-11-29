@@ -21,7 +21,7 @@ class Block:
             ).hexdigest()
             nonce += 1
 
-        #print(f"Hash found: {hash}")
+        # print(f"Hash found: {hash}")
         print(f"Nonce: {nonce}")
         return hash
 
@@ -42,6 +42,8 @@ class Blockchain:
         last_block = self.get_last_block()
         new_block = Block(last_block.index + 1, datetime.now(), data, last_block.hash)
         self.chain.append(new_block)
+
+        return new_block
 
     def get_last_block(self):
         return self.chain[-1]
@@ -67,3 +69,17 @@ class Blockchain:
 
     def check_block_data(self, index):
         return self.chain[index].data
+
+    def check_block_hash(self, index):
+        return self.chain[index].hash
+
+    def save_chain(self, filename):
+        with open(filename, "w") as f:
+            for block in self.chain:
+                f.write(f"{block.index},{block.timestamp},{block.data},{block.previous_hash},{block.hash}\n")
+
+    def load_chain(self, filename):
+        with open(filename, "r") as f:
+            for line in f:
+                index, timestamp, data, previous_hash, hash = line.split(",")
+                self.add_block(data)
